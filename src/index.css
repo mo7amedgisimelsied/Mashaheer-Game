@@ -14,6 +14,11 @@
 body {
   margin: 0;
   display: flex;
+  justify-content: center;
   place-items: center;
-  background-color: aqua;
+}
+.game--container{
+  display: flex;
+  justify-content: space-around;
+  gap: 3rem;
 }
