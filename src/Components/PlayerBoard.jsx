@@ -14,8 +14,13 @@ function PlayerBoard(){
         <Header />
         <div className="board2">
             {
-                chars.map(char => <div style={{margin: "0.2rem", width: "8rem", height: "8rem"}}>
-                    <img src="https://picsum.photos/300/300" style={{width: "100%", borderRadius: "10px"}} />
+                chars.map(char => <div style={{margin: "0.2rem", width: "8rem", height: "8rem", background: `url("https://picsum.photos/300/300")`,borderRadius: "10px", backgroundSize: "cover", backgroundPosition: "center", display: "flex", alignItems: "end"}}>
+                <p style={{backgroundColor: "black", width: "100%", marginBottom: "0"
+                    , fontSize: "0.7rem"
+                    , padding: " 0 0 0 0.5rem"
+                    ,borderBottomLeftRadius: "10px",
+                    borderBottomRightRadius: "10px"
+                }}>Walter White</p>
                 </div>)
             }
             </div>

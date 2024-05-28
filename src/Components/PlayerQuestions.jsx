@@ -1,6 +1,12 @@
 function PlayerQuestions(){
+    const playerQuestions = Array(3).fill("Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, debitis!")
     return(
-        <h1>player questions</h1>
+        <div className="questions-container">
+            {playerQuestions.map( question =>
+                <p>{question}</p>
+            )}
+            
+        </div>
     )
 }
 
