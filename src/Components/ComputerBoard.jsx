@@ -1,5 +1,7 @@
-function ComputerBoard(){
-    const chars =   Array(16).fill("?");
+import { useState } from "react";
+
+function ComputerBoard(props){
+    // const [chars, setChars] = useState(props.compCharacters);
     return (
         <div>
             <div style={{display: "flex",alignItems: "center",gap: "0.5rem"}}>
@@ -9,8 +11,8 @@ function ComputerBoard(){
 
             <div className="board">
             {
-                chars.map(char => <div className="char-card">
-                    {char}
+                props.compCharacters.map(char => <div className="char-card">
+                    ?
                 </div>)
             }
             </div>

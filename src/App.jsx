@@ -7,7 +7,10 @@ import PlayerBoard from "./Components/PlayerBoard"
 
 function App() {
   const [questions, setQuestions] = useState();
-  const [characters, setCharacters] = useState();
+  // const [characters, setCharacters] = useState();
+  const [compChars, setCompChars] = useState();
+  const [playerChars, setPlayerChars] = useState();
+
   useEffect( () => {
             fetch("http://localhost:8080/Test/questions")
             .then(res => res.json())
@@ -17,19 +20,19 @@ function App() {
   useEffect( () => {
     fetch("http://localhost:8080/Test/characters")
     .then(res => res.json())
-    .then((result) => {setCharacters(result)})
+    .then((result) => {setCompChars(result); setPlayerChars(result)})
   }
 ,[])
 
   return (
     <div className="game--container">
       <div className="left--bar">
-      <ComputerBoard />
+      {compChars && <ComputerBoard compCharacters = {compChars} func = {setCompChars} />}
       <InfoCard />
       </div>
 
       <div className="player--board">
-      {characters && <PlayerBoard characters = {characters}/>}
+      {playerChars && <PlayerBoard playerCharacters = {playerChars} func = {setPlayerChars}/>}
       </div>
 
       <div className="right--bar">

@@ -1,11 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 function Chat(props){
 const [textArr, setArr] = useState([userText("lorem20"), compText("Lorem ipsum dolor sit amet consectetur, adipisicing elit.")]);
-// const [playerQuestions, setQuestions] = useState(Array(3).fill("Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, debitis!"));
+
 const [playerQuestions, setQuestions] = useState(props.questions);
-// console.log();
+const [compQuestions, setCompQuestions] = useState(props.questions);
+const [currentQuestion, setCurrent] =useState();
+
+
+const [findAnswer, setAnswer] = useState([1, true]);
+useEffect( () => {
+    
+     fetch(`http://localhost:8080/Test/questionAnswer/${findAnswer[0]}/${findAnswer[1]}`)
+    .then(res => res.json())
+    .then(result => {console.log(result)})}
+    ,[findAnswer])
+
+
 
 function PlayerQuestions() {
     
@@ -36,7 +48,29 @@ function PlayerQuestions() {
     );
 }
 
+function ask(){
+    setArr(prev => {
+        const newArr = [...prev];
+        // const q = compQuestions[Math.floor(Math.random() * compQuestions.length)];
+        const q = compQuestions[0];
+        newArr.push(compText(q.questionText));
+        setCurrent(q);
+        return newArr;
+    });
+}
 
+function eliminate(question_id, value){
+    
+    setAnswer([question_id, value]);
+    // useEffect( () => {
+    
+    //  fetch(`http://localhost:8080/Test/questionask/${question_id}/${value}`)
+    // .then(res => res.json())
+    // .then(result => {console.log(result)})}
+    // ,[])
+    // console.log(question_id)
+
+}
 
 function userText(text){
     return(
@@ -69,6 +103,7 @@ function compText(text){
             <button onClick={() => setArr(prev =>{
                 const newArr = [...prev];
                 newArr.push(userText("Yes"));
+               currentQuestion && eliminate(currentQuestion.questionId, true);
                 return newArr;
             })}>Yes</button>
 
@@ -77,6 +112,14 @@ function compText(text){
                 newArr.push(userText("No"));
                 return newArr;
             })}>No</button>
+
+            <button onClick={() => setArr(prev =>{
+                const newArr = [...prev];
+                newArr.push(userText("Your turn!"));
+                ask();
+                return newArr;
+            })}>Your turn!</button>
+
             </div>
         </div>
         <PlayerQuestions />

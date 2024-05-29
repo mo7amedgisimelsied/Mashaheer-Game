@@ -10,14 +10,14 @@ function Header(){
 }
 
 function PlayerBoard(props){
-    // const chars =   Array(16).fill("?");
-    const [chars, setChars] = useState(props.characters);
+
+    // const [chars, setChars] = useState(props.playerCharacters);
     return (
         <>
         <Header />
         <div className="board2">
             {
-                chars.map(char => <div style={{margin: "0.2rem", width: "8rem", height: "8rem", background: `url("https://picsum.photos/300/300")`,borderRadius: "10px", backgroundSize: "cover", backgroundPosition: "center", display: "flex", alignItems: "end"}}>
+                props.playerCharacters.map(char => <div style={{margin: "0.2rem", width: "8rem", height: "8rem", background: `url("https://picsum.photos/300/300")`,borderRadius: "10px", backgroundSize: "cover", backgroundPosition: "center", display: "flex", alignItems: "end"}}>
                 <p style={{backgroundColor: "black", width: "100%", marginBottom: "0"
                     , fontSize: "0.7rem"
                     , padding: " 0 0 0 0.5rem"
