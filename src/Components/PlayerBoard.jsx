@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 function Header(){
     return(
         <div style={{display: "flex", gap: "3rem",textAlign: "center", padding: "2rem 1rem", borderBottom: "1px white solid"}}>
@@ -7,8 +9,9 @@ function Header(){
     )
 }
 
-function PlayerBoard(){
-    const chars =   Array(16).fill("?");
+function PlayerBoard(props){
+    // const chars =   Array(16).fill("?");
+    const [chars, setChars] = useState(props.characters);
     return (
         <>
         <Header />
@@ -20,7 +23,7 @@ function PlayerBoard(){
                     , padding: " 0 0 0 0.5rem"
                     ,borderBottomLeftRadius: "10px",
                     borderBottomRightRadius: "10px"
-                }}>Walter White</p>
+                }}>{char.name}</p>
                 </div>)
             }
             </div>

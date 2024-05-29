@@ -1,10 +1,11 @@
 import { useState } from "react";
 
 
-function Chat(){
+function Chat(props){
 const [textArr, setArr] = useState([userText("lorem20"), compText("Lorem ipsum dolor sit amet consectetur, adipisicing elit.")]);
-const [playerQuestions, setQuestions] = useState(Array(3).fill("Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, debitis!"));
-
+// const [playerQuestions, setQuestions] = useState(Array(3).fill("Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid, debitis!"));
+const [playerQuestions, setQuestions] = useState(props.questions);
+// console.log();
 
 function PlayerQuestions() {
     
@@ -24,10 +25,11 @@ function PlayerQuestions() {
     };
 
     return (
+        
         <div className="questions-container">
             {playerQuestions.map((question, index) => (
-                <p key={index} onClick={() => handleClick(question, index)}>
-                    {question}
+                <p key={index} onClick={() => handleClick(question.questionText, index)}>
+                    {question.questionText}
                 </p>
             ))}
         </div>
