@@ -10,20 +10,87 @@ function Header(){
 }
 
 function PlayerBoard(props){
+    
+    const [playerAnswer, setPlayerAnswer] = useState([...props.playerCharacters]);
+    var [switcher, setSwitcher] = useState(Array(10).fill(true));
+    
 
-    // const [chars, setChars] = useState(props.playerCharacters);
+    function remove(id) {
+        // Find the character to remove
+        const removedCharacter = playerAnswer.find(item => item.characterId === id);
+        
+        if (!removedCharacter) {
+            console.log("Character not found!");
+            return;
+        }
+
+        // Create a new array without the removed character
+        const updatedAnswer = playerAnswer.filter(item => item.characterId !== id);
+
+        if (updatedAnswer.length === 0) {
+            console.log("That was your best shot? You lost...");
+        } else if (updatedAnswer.length === 1) {
+            console.log(`Your answer is ${updatedAnswer[0].name}`);
+        } else {
+            console.log(`${removedCharacter.name} was removed`);
+        }
+
+        // Update the state with the new array
+        setPlayerAnswer(updatedAnswer);
+    }
+
+
+    function add(char){
+
+                setPlayerAnswer(prev => {
+                    const newArr = [...prev];
+                    console.log(char);
+                    newArr.push(char);
+                    return newArr;
+                })
+                
+            
+    }
+
+
     return (
         <>
         <Header />
         <div className="board2">
             {
-                props.playerCharacters.map(char => <div style={{margin: "0.2rem", width: "8rem", height: "8rem", background: `url("https://picsum.photos/300/300")`,borderRadius: "10px", backgroundSize: "cover", backgroundPosition: "center", display: "flex", alignItems: "end"}}>
+                props.playerCharacters.map((char, index) => 
+                <div style={{margin: "0.2rem", width: "8rem", height: "8rem", background: `url("https://picsum.photos/300/300")`,borderRadius: "10px", backgroundSize: "cover", backgroundPosition: "center", 
+                display: "flex", alignItems: "end", opacity: `${switcher[index] ? "1" : "0.5"}` }}
+                onClick={()=> {
+                    
+                     if (switcher[index]){
+                        remove(char.characterId);
+                        setSwitcher(prev => {
+                            const new_arr = [...prev];
+                            new_arr[index] = false;
+                            return new_arr 
+                        });
+                    }
+                    else {
+                        add(char);
+                        setSwitcher(prev => {
+                            const new_arr = [...prev];
+                            new_arr[index] = true;
+                            return new_arr 
+                        });
+                    }
+                    
+                    
+                        
+                }}
+                >
                 <p style={{backgroundColor: "black", width: "100%", marginBottom: "0"
                     , fontSize: "0.7rem"
                     , padding: " 0 0 0 0.5rem"
                     ,borderBottomLeftRadius: "10px",
                     borderBottomRightRadius: "10px"
-                }}>{char.name}</p>
+                }}
+                >{char.name}</p>
                 </div>)
             }
             </div>
