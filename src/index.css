@@ -19,11 +19,12 @@ body {
   justify-content: space-between;
 }
 .left--bar,.player--board, .right--bar{
-border: 1px solid rgb(83, 83, 83);
+border: 1px solid #5B5B5B;
 }
 .left--bar{
   width: 20%;
   padding: 0 0.5rem;
+  background-color: #171717;
 }
 
 .player--board{
@@ -54,12 +55,10 @@ border: 1px solid rgb(83, 83, 83);
 .char-card{
   width: 3rem;
   height: 3rem;
-  /* background-color: rgb(0, 191, 255); */
   color: white;
   font-size: 2rem;
   font-weight: bold;
   text-align: center;
-  /* border: 1px solid white; */
   border-radius: 5px;
   margin: 0.1rem;
 
@@ -69,7 +68,7 @@ border: 1px solid rgb(83, 83, 83);
 
 .chat{
   margin: 1rem 0;
-  border: 1px white solid;
+  border: 1px #5B5B5B solid;
   border-radius: 15px;
   padding: 1rem 0.5rem;
 }
@@ -93,12 +92,12 @@ border: 1px solid rgb(83, 83, 83);
 }
 
 .computer-chat {
-  background-color: lightgray;
+  background-color: #46CAF4;
   align-self: flex-start;
 }
 
 .user-chat {
-  background-color: black;
+  background-color: #2F2F2F;
   color: white;
   align-self: flex-end;
 }
@@ -112,7 +111,7 @@ border: 1px solid rgb(83, 83, 83);
 
 
 .questions-container{
-  border: 1px solid white;
+  border: 1px solid #5B5B5B;
   border-radius: 15px;
 
   margin: 1rem 0;
@@ -121,7 +120,20 @@ border: 1px solid rgb(83, 83, 83);
 
 .questions-container > p{
   margin: 0.5rem 0;
-  border: 1px solid white;
+  border: 1px solid #5B5B5B;
   border-radius: 5px;
   padding: 0.5rem;
+}
+
+.btn{
+  background-color: #424242;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.btn:hover{
+  transform: scale(1.1);
 }

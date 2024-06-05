@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 
 function Chat(props){
-const [textArr, setArr] = useState([userText("lorem20"), compText("Lorem ipsum dolor sit amet consectetur, adipisicing elit.")]);
+const [textArr, setArr] = useState([compText("Ask me any question from the list bellow and try to guess which character i'm thinking about")]);
 
 const [playerQuestions, setQuestions] = useState(props.questions);
 const [compQuestions, setCompQuestions] = useState(props.questions);
@@ -109,7 +109,7 @@ function eliminate(question_id, value) {
             // Check if the answer matches the expected value
             if (dataFetched[0].answer !== value) {
                 updatedCharacters.splice(index, 1);
-                props.styles[index] = { backgroundColor: "red" };
+                props.styles[index] = { backgroundColor: "#DA3055" };
                 console.log(`${character.characterId} doesn't meet the criteria`);
             } else {
                 console.log(`${character.characterId} meets the criteria`);
@@ -162,21 +162,21 @@ function compText(text){
             </div>
             <div style={{display: "flex", justifyContent: "center", gap: "1rem"}}>
             
-            <button onClick={() => setArr(prev =>{
+            <button className="btn" onClick={() => setArr(prev =>{
                 const newArr = [...prev];
                 newArr.push(userText("Yes"));
                currentQuestion && eliminate(currentQuestion.questionId, true);
                 return newArr;
             })}>Yes</button>
 
-            <button onClick={() => setArr(prev =>{
+            <button className="btn" onClick={() => setArr(prev =>{
                 const newArr = [...prev];
                 newArr.push(userText("No"));
                 currentQuestion && eliminate(currentQuestion.questionId, false)
                 return newArr;
             })}>No</button>
 
-            <button onClick={() => {setArr(prev =>{
+            <button className="btn" onClick={() => {setArr(prev =>{
                 const newArr = [...prev];
                 newArr.push(userText("Your turn!"));
                 return newArr;

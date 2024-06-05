@@ -3,11 +3,12 @@ import Chat from "./Components/Chat"
 import ComputerBoard from "./Components/ComputerBoard"
 import InfoCard from "./Components/InfoCard"
 import PlayerBoard from "./Components/PlayerBoard"
+import {HashRouter as Router, Route, Switch} from 'react-router-dom'
 
 
 function App() {
   const [questions, setQuestions] = useState();
-  const [styles, setStyles] = useState(Array(10).fill({backgroundColor: "blue"}));
+  const [styles, setStyles] = useState(Array(10).fill({backgroundColor: "#0070E0"}));
   const [compChars, setCompChars] = useState();
   const [playerChars, setPlayerChars] = useState();
   
@@ -29,6 +30,7 @@ function App() {
 
 
   return (
+    <Router>
     <div className="game--container">
       <div className="left--bar">
       {compChars && <ComputerBoard compCharacters = {compChars} func = {setCompChars} styles = {styles} />}
@@ -43,6 +45,7 @@ function App() {
         {questions && compChars && <Chat questions = {questions} compCharacters = {compChars} func = {setCompChars} styles = {styles} compChoice = {compChars[1]}/>}
       </div>
     </div>
+    </Router>
   )
 }
 

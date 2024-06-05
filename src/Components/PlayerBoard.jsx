@@ -2,9 +2,9 @@ import { useState } from "react";
 
 function Header(){
     return(
-        <div style={{display: "flex", gap: "3rem",textAlign: "center", padding: "2rem 1rem", borderBottom: "1px white solid"}}>
+        <div style={{display: "flex", gap: "3rem",textAlign: "center", padding: "2rem 1rem", borderBottom: "1px #5B5B5B solid"}}>
             <img src="https://picsum.photos/300/300" style={{width: "20%"}}/>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi cumque necessitatibus nihil aut.</p>
+            <p>Guess which person the computer is thinking about before he guesses your person first!</p>
         </div>
     )
 }
