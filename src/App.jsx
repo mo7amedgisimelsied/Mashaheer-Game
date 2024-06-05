@@ -3,7 +3,8 @@ import Chat from "./Components/Chat"
 import ComputerBoard from "./Components/ComputerBoard"
 import InfoCard from "./Components/InfoCard"
 import PlayerBoard from "./Components/PlayerBoard"
-import {HashRouter as Router, Route, Switch} from 'react-router-dom'
+import {HashRouter as Router, Route} from 'react-router-dom'
+import Home from "./Components/Home"
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
 
   return (
     <Router>
+    <Route exact path="/">
     <div className="game--container">
       <div className="left--bar">
       {compChars && <ComputerBoard compCharacters = {compChars} func = {setCompChars} styles = {styles} />}
@@ -45,6 +47,12 @@ function App() {
         {questions && compChars && <Chat questions = {questions} compCharacters = {compChars} func = {setCompChars} styles = {styles} compChoice = {compChars[1]}/>}
       </div>
     </div>
+    </Route>
+
+
+    <Route exact path = "/home">
+      <Home />
+    </Route>
     </Router>
   )
 }
