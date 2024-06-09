@@ -3,7 +3,7 @@ import { useState } from "react";
 
 
 function PlayerBoard(props){
-
+console.log(props.compChoice.name);
 
     function Header(){
 
@@ -11,7 +11,7 @@ function PlayerBoard(props){
         return(
             <div style={{display: "flex", gap: "3rem",textAlign: "center", padding: "2rem 1rem", borderBottom: "1px #5B5B5B solid"}}>
                 <div>
-                <img src={props.playerChoice.pic} style={{minWidth: "80%"}}/>
+                <img src={props.playerChoice.pic} style={{width: "10rem"}}/>
                 <p style={{margin: "0"}}>{props.playerChoice.name}</p>
                 </div>
                 <p>Guess which person the computer is thinking about before he guesses your person first!</p>
@@ -40,6 +40,8 @@ function PlayerBoard(props){
             console.log("That was your best shot? You lost...");
         } else if (updatedAnswer.length === 1) {
             console.log(`Your answer is ${updatedAnswer[0].name}`);
+            updatedAnswer[0].characterId == props.compChoice.characterId? setFeedback(<span>You Won!!</span>) : setFeedback(<span>You lost, i was thinking about {props.compChoice.name}</span>);
+
         } else {
             setFeedback(<span>You eliminated <span style={{color: "red"}}>{removedCharacter.name}</span></span>);
             props.setSelectedChar(removedCharacter);

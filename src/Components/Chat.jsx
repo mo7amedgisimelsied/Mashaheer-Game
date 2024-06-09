@@ -129,6 +129,11 @@ function eliminate(question_id, value) {
             });
         } else if (updatedCharacters.length === 1) {
             console.log(`You are thinking about: ${updatedCharacters[0].characterId}`);
+            setArr(prev => {
+                const newArr = [...prev];
+                newArr.push(compText(`You are thinking about: ${updatedCharacters[0].name}`));
+                return newArr;
+            })
         }
     }
 
@@ -172,14 +177,14 @@ function compText(text){
                 newArr.push(userText("Yes"));
                currentQuestion && eliminate(currentQuestion.questionId, true);
                 return newArr;
-            }); ask();}}>Yes</button>
+            }); if (props.compCharacters.length !== 1) {ask()}}}>Yes</button>
 
             <button className="btn" onClick={() => {setArr(prev =>{
                 const newArr = [...prev];
                 newArr.push(userText("No"));
                 currentQuestion && eliminate(currentQuestion.questionId, false)
                 return newArr;
-            }); ask();}}>No</button>
+            }); if (props.compCharacters.length !== 1) {ask()}}}>No</button>
 
             <button className="btn" onClick={() => {setArr(prev =>{
                 const newArr = [...prev];

@@ -16,6 +16,7 @@ function App() {
   const [selectedChar, setSelectedChar] = useState({});
   
   
+  
 
 
   useEffect( () => {
@@ -31,8 +32,7 @@ function App() {
     
   }
 ,[])
-
-
+const rando = Math.floor(Math.random() * 5);
   return (
     <Router>
     <Route exact path="/game">
@@ -43,11 +43,11 @@ function App() {
       </div>
 
       <div className="player--board">
-      {playerChars && <PlayerBoard playerCharacters = {playerChars} func = {setPlayerChars} playerChoice = {playerChoice} selected = {selectedChar} setSelectedChar = {setSelectedChar}/>}
+      {playerChars && compChars && <PlayerBoard playerCharacters = {playerChars} func = {setPlayerChars} playerChoice = {playerChoice} selected = {selectedChar} setSelectedChar = {setSelectedChar} compChoice = {compChars[rando]}/>}
       </div>
 
       <div className="right--bar">
-        {questions && compChars && <Chat questions = {questions} compCharacters = {compChars} func = {setCompChars} styles = {styles} compChoice = {compChars[Math.floor(Math.random() * compChars.length)]}/>}
+        {questions && compChars && <Chat questions = {questions} compCharacters = {compChars} func = {setCompChars} styles = {styles} compChoice = {compChars[rando]}/>}
       </div>
     </div>
     </Route>
