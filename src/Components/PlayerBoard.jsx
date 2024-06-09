@@ -1,20 +1,29 @@
 import { useState } from "react";
 
-function Header(){
-    return(
-        <div style={{display: "flex", gap: "3rem",textAlign: "center", padding: "2rem 1rem", borderBottom: "1px #5B5B5B solid"}}>
-            <img src="https://picsum.photos/300/300" style={{width: "20%"}}/>
-            <p>Guess which person the computer is thinking about before he guesses your person first!</p>
-        </div>
-    )
-}
+
 
 function PlayerBoard(props){
+
+
+    function Header(){
+
+
+        return(
+            <div style={{display: "flex", gap: "3rem",textAlign: "center", padding: "2rem 1rem", borderBottom: "1px #5B5B5B solid"}}>
+                <div>
+                <img src={props.playerChoice.pic} style={{minWidth: "80%"}}/>
+                <p style={{margin: "0"}}>{props.playerChoice.name}</p>
+                </div>
+                <p>Guess which person the computer is thinking about before he guesses your person first!</p>
+            </div>
+        )
+    }
+    
     
     const [playerAnswer, setPlayerAnswer] = useState([...props.playerCharacters]);
     var [switcher, setSwitcher] = useState(Array(10).fill(true));
+    const [feedback, setFeedback] = useState(<span></span>);
     
-
     function remove(id) {
         // Find the character to remove
         const removedCharacter = playerAnswer.find(item => item.characterId === id);
@@ -32,7 +41,9 @@ function PlayerBoard(props){
         } else if (updatedAnswer.length === 1) {
             console.log(`Your answer is ${updatedAnswer[0].name}`);
         } else {
-            console.log(`${removedCharacter.name} was removed`);
+            setFeedback(<span>You eliminated <span style={{color: "red"}}>{removedCharacter.name}</span></span>);
+            props.setSelectedChar(removedCharacter);
+            // console.log(`${removedCharacter.name} was removed`);
         }
 
         // Update the state with the new array
@@ -45,6 +56,8 @@ function PlayerBoard(props){
                 setPlayerAnswer(prev => {
                     const newArr = [...prev];
                     console.log(char);
+                    setFeedback(<span>You uneliminated <span style={{color: "green"}}>{char.name}</span></span>);
+                    props.setSelectedChar(char);
                     newArr.push(char);
                     return newArr;
                 })
@@ -52,14 +65,15 @@ function PlayerBoard(props){
             
     }
 
-
     return (
         <>
         <Header />
+        <p style={{margin: "0 0 0 1rem"}}>{feedback}</p>
+
         <div className="board2">
             {
                 props.playerCharacters.map((char, index) => 
-                <div style={{margin: "0.2rem", width: "8rem", height: "8rem", background: `url("https://picsum.photos/300/300")`,borderRadius: "10px", backgroundSize: "cover", backgroundPosition: "center", 
+                <div style={{margin: "0.2rem", width: "8rem", height: "8rem", background: `url(${char.pic})`,borderRadius: "10px", backgroundSize: "cover", backgroundPosition: "center", 
                 display: "flex", alignItems: "end", opacity: `${switcher[index] ? "1" : "0.5"}` }}
                 onClick={()=> {
                     
@@ -84,7 +98,7 @@ function PlayerBoard(props){
                         
                 }}
                 >
-                <p style={{backgroundColor: "black", width: "100%", marginBottom: "0"
+                <p style={{backgroundColor: "rgba(0, 0, 0, 0.7)", width: "100%", marginBottom: "0"
                     , fontSize: "0.7rem"
                     , padding: " 0 0 0 0.5rem"
                     ,borderBottomLeftRadius: "10px",

@@ -12,6 +12,9 @@ function App() {
   const [styles, setStyles] = useState(Array(10).fill({backgroundColor: "#0070E0"}));
   const [compChars, setCompChars] = useState();
   const [playerChars, setPlayerChars] = useState();
+  const [playerChoice, setPlayerChoice] = useState({});
+  const [selectedChar, setSelectedChar] = useState({});
+  
   
 
 
@@ -24,7 +27,7 @@ function App() {
   useEffect( () => {
     fetch("http://localhost:8080/Test/characters")
     .then(res => res.json())
-    .then((result) => {setCompChars(result); setPlayerChars(result)})
+    .then((result) => {setCompChars(result); setPlayerChars(result); setSelectedChar(result[0])})
     
   }
 ,[])
@@ -32,26 +35,26 @@ function App() {
 
   return (
     <Router>
-    <Route exact path="/">
+    <Route exact path="/game">
     <div className="game--container">
       <div className="left--bar">
       {compChars && <ComputerBoard compCharacters = {compChars} func = {setCompChars} styles = {styles} />}
-      <InfoCard />
+      <InfoCard selected = {selectedChar}/>
       </div>
 
       <div className="player--board">
-      {playerChars && <PlayerBoard playerCharacters = {playerChars} func = {setPlayerChars}/>}
+      {playerChars && <PlayerBoard playerCharacters = {playerChars} func = {setPlayerChars} playerChoice = {playerChoice} selected = {selectedChar} setSelectedChar = {setSelectedChar}/>}
       </div>
 
       <div className="right--bar">
-        {questions && compChars && <Chat questions = {questions} compCharacters = {compChars} func = {setCompChars} styles = {styles} compChoice = {compChars[1]}/>}
+        {questions && compChars && <Chat questions = {questions} compCharacters = {compChars} func = {setCompChars} styles = {styles} compChoice = {compChars[Math.floor(Math.random() * compChars.length)]}/>}
       </div>
     </div>
     </Route>
 
 
-    <Route exact path = "/home">
-      <Home />
+    <Route exact path = "/">
+     { playerChars && <Home selectChar = {[...playerChars]} playerChoice = {playerChoice} setPlayerChoice = {setPlayerChoice}/> }
     </Route>
     </Router>
   )

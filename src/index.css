@@ -29,6 +29,7 @@ border: 1px solid #5B5B5B;
 
 .player--board{
   width: 50%;
+  
 }
 
 .right--bar{
@@ -51,6 +52,8 @@ border: 1px solid #5B5B5B;
   justify-content: center;
   margin-top: 1rem;
 }
+
+
 
 .char-card{
   width: 3rem;
@@ -112,8 +115,8 @@ border: 1px solid #5B5B5B;
 
 .questions-container{
   border: 1px solid #5B5B5B;
-  border-radius: 15px;
 
+  cursor: pointer;
   margin: 1rem 0;
   padding: 1rem 0.5rem;
 }
@@ -123,6 +126,8 @@ border: 1px solid #5B5B5B;
   border: 1px solid #5B5B5B;
   border-radius: 5px;
   padding: 0.5rem;
+  border-radius: 15px;
+
 }
 
 .btn{

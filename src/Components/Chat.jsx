@@ -121,7 +121,12 @@ function eliminate(question_id, value) {
 
         // Check the length of updated characters after processing all characters
         if (updatedCharacters.length === 0) {
-            console.log("Character was not found, try again and make sure to answer correctly");
+            // console.log("Character was not found, try again and make sure to answer correctly");
+            setArr(prev => {
+                const newArr = [...prev];
+                newArr.push(compText("Character was not found, try again and make sure to answer correctly"));
+                return newArr;
+            });
         } else if (updatedCharacters.length === 1) {
             console.log(`You are thinking about: ${updatedCharacters[0].characterId}`);
         }
@@ -162,19 +167,19 @@ function compText(text){
             </div>
             <div style={{display: "flex", justifyContent: "center", gap: "1rem"}}>
             
-            <button className="btn" onClick={() => setArr(prev =>{
+            <button className="btn" onClick={() => {setArr(prev =>{
                 const newArr = [...prev];
                 newArr.push(userText("Yes"));
                currentQuestion && eliminate(currentQuestion.questionId, true);
                 return newArr;
-            })}>Yes</button>
+            }); ask();}}>Yes</button>
 
-            <button className="btn" onClick={() => setArr(prev =>{
+            <button className="btn" onClick={() => {setArr(prev =>{
                 const newArr = [...prev];
                 newArr.push(userText("No"));
                 currentQuestion && eliminate(currentQuestion.questionId, false)
                 return newArr;
-            })}>No</button>
+            }); ask();}}>No</button>
 
             <button className="btn" onClick={() => {setArr(prev =>{
                 const newArr = [...prev];
