@@ -15,8 +15,7 @@ it uses compText() function to create computer message, and playerText() functio
   const [currentQuestion, setCurrent] = useState();
 
   const fetchAnswer = async (question_id, character_id) => {
-    const answerData = require("../DataMock/answers.js");
-    const result = answerData.find(
+    const result = answersData.find(
       (answer) =>
         answer.questionId === question_id && answer.characterId === character_id
     );
@@ -111,7 +110,7 @@ right now it iterates through the compQuestions array linearly, but it could be 
         await new Promise((resolve) => setTimeout(resolve, 500));
 
         // Check if the answer matches the expected value
-        if (dataFetched[0].answer !== value) {
+        if (dataFetched.answer !== value) {
           updatedCharacters.splice(index, 1);
           props.styles[index] = { backgroundColor: "#DA3055" };
           console.log(`${character.characterId} doesn't meet the criteria`);
