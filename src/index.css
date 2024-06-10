@@ -19,27 +19,50 @@ body {
   display: flex;
   justify-content: space-between;
 }
+@media (max-width: 1024px) {
+  .game--container{
+    flex-direction: column;
+  }
+  .left--bar, .right--bar, .player--board{
+    width: 100%;
+  }
+}
+
+@media (min-width: 1024px) {
+  
+  .left--bar{
+    width: 20%;
+  }
+
+  .right--bar{
+    width: 30%;
+  }
+  .player--board{
+    width: 50%;
+  }
+}
+
 .left--bar,.player--board, .right--bar{
 border: 1px solid #5B5B5B;
 }
 .left--bar{
-  width: 20%;
+  /* width: 20%; */
   padding: 0 0.5rem;
   background-color: #171717;
 }
 
 .player--board{
-  width: 50%;
+  /* width: 50%; */
 }
 
 .right--bar{
-  width: 30%;
+  /* width: 30%; */
   padding: 0 1rem;
 }
 
 .computer-profile{
   border-radius: 50%;
-  width: 10%;
+  width: 2rem;
 }
 
 .board{
