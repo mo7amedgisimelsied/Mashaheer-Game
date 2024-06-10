@@ -2,6 +2,8 @@ import { useState } from "react";
 
 
 function Chat(props){
+/* textArr sores all the messages between computer and player and updates the UI each time a new message is added.
+it uses compText() function to create computer message, and playerText() function to create player message */
 const [textArr, setArr] = useState([compText("Ask me any question from the list bellow and try to guess which character i'm thinking about")]);
 
 const [playerQuestions, setQuestions] = useState(props.questions);
@@ -67,7 +69,9 @@ async function answerToPlayer(question_id) {
 }
 
 
-
+/*The ask() function is used to update the UI with the next question.
+right now it iterates through the compQuestions array linearly, but it could be implemented with a more complex algorithms in the future.
+*/
 function ask(){
     setArr(prev => {
         const newArr = [...prev];
@@ -170,23 +174,29 @@ function compText(text){
 
            
             </div>
-            <div style={{display: "flex", justifyContent: "center", gap: "1rem"}}>
+            <div className="btn-container">
             
-            <button className="btn" onClick={() => {setArr(prev =>{
+            <button className="btn" 
+            onClick={() => {
+                setArr(prev =>{
                 const newArr = [...prev];
                 newArr.push(userText("Yes"));
-               currentQuestion && eliminate(currentQuestion.questionId, true);
+                currentQuestion && eliminate(currentQuestion.questionId, true);
                 return newArr;
             })}}>Yes</button>
 
-            <button className="btn" onClick={() => {setArr(prev =>{
+            <button className="btn" 
+            onClick={() => {
+                setArr(prev =>{
                 const newArr = [...prev];
                 newArr.push(userText("No"));
                 currentQuestion && eliminate(currentQuestion.questionId, false)
                 return newArr;
             })}}>No</button>
 
-            <button className="btn" onClick={() => {setArr(prev =>{
+            <button className="btn" 
+            onClick={() => {
+                setArr(prev =>{
                 const newArr = [...prev];
                 newArr.push(userText("Your turn!"));
                 return newArr;
