@@ -14,7 +14,7 @@ function App() {
   const [playerChars, setPlayerChars] = useState();
   const [playerChoice, setPlayerChoice] = useState({});
   const [selectedChar, setSelectedChar] = useState({});
-  
+  const [compChoice, setCompChoice] = useState({});
   
   
 
@@ -28,11 +28,11 @@ function App() {
   useEffect( () => {
     fetch("http://localhost:8080/Test/characters")
     .then(res => res.json())
-    .then((result) => {setCompChars(result); setPlayerChars(result); setSelectedChar(result[0])})
+    .then((result) => {setCompChars(result); setPlayerChars(result); setSelectedChar(result[0]); setCompChoice(result[Math.floor(Math.random() * 10)])})
     
   }
 ,[])
-const rando = Math.floor(Math.random() * 5);
+
   return (
     <Router>
     <Route exact path="/game">
@@ -43,11 +43,11 @@ const rando = Math.floor(Math.random() * 5);
       </div>
 
       <div className="player--board">
-      {playerChars && compChars && <PlayerBoard playerCharacters = {playerChars} func = {setPlayerChars} playerChoice = {playerChoice} selected = {selectedChar} setSelectedChar = {setSelectedChar} compChoice = {compChars[rando]}/>}
+      {playerChars && compChars && <PlayerBoard playerCharacters = {playerChars} func = {setPlayerChars} playerChoice = {playerChoice} selected = {selectedChar} setSelectedChar = {setSelectedChar} compChoice = {compChoice}/>}
       </div>
 
       <div className="right--bar">
-        {questions && compChars && <Chat questions = {questions} compCharacters = {compChars} func = {setCompChars} styles = {styles} compChoice = {compChars[rando]}/>}
+        {questions && compChars && <Chat questions = {questions} compCharacters = {compChars} func = {setCompChars} styles = {styles} compChoice = {compChoice}/>}
       </div>
     </div>
     </Route>

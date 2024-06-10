@@ -3,7 +3,7 @@ import { useState } from "react";
 
 
 function PlayerBoard(props){
-console.log(props.compChoice.name);
+
 
     function Header(){
 
@@ -11,7 +11,7 @@ console.log(props.compChoice.name);
         return(
             <div style={{display: "flex", gap: "3rem",textAlign: "center", padding: "2rem 1rem", borderBottom: "1px #5B5B5B solid"}}>
                 <div>
-                <img src={props.playerChoice.pic} style={{width: "10rem"}}/>
+                <img src={props.playerChoice.pic} style={{width: "8rem", height: "8rem", objectFit: "cover"}}/>
                 <p style={{margin: "0"}}>{props.playerChoice.name}</p>
                 </div>
                 <p>Guess which person the computer is thinking about before he guesses your person first!</p>
@@ -22,9 +22,10 @@ console.log(props.compChoice.name);
     
     const [playerAnswer, setPlayerAnswer] = useState([...props.playerCharacters]);
     var [switcher, setSwitcher] = useState(Array(10).fill(true));
-    const [feedback, setFeedback] = useState(<span></span>);
+    const [feedback, setFeedback] = useState(<span>{props.compChoice.name}</span>);
     
     function remove(id) {
+        console.log(props.compChoice.name)
         // Find the character to remove
         const removedCharacter = playerAnswer.find(item => item.characterId === id);
         
@@ -39,12 +40,17 @@ console.log(props.compChoice.name);
         if (updatedAnswer.length === 0) {
             console.log("That was your best shot? You lost...");
         } else if (updatedAnswer.length === 1) {
-            console.log(`Your answer is ${updatedAnswer[0].name}`);
-            updatedAnswer[0].characterId == props.compChoice.characterId? setFeedback(<span>You Won!!</span>) : setFeedback(<span>You lost, i was thinking about {props.compChoice.name}</span>);
-
+            // console.log(`Your answer is ${updatedAnswer[0].name}`);
+            console.log(`Checking characterId: ${updatedAnswer[0].characterId} against ${props.compChoice.characterId}`);
+            // updatedAnswer[0].characterId === props.compChoice.characterId? setFeedback(<span>You Won!!</span>) : setFeedback(<span>You lost, i was thinking about {props.compChoice.name}</span>);
+            updatedAnswer[0].characterId === props.compChoice.characterId ? setFeedback(
+              <span style={{ color: "rgb(0, 255, 0)", fontWeight: "bold", fontSize: "2rem" }}>You Won!! <span role="img" aria-label="trophy">🏆</span></span>
+            ) : setFeedback(
+              <span style={{ color: "red", fontWeight: "bold" }}>You lost, I was thinking about {props.compChoice.name} <span role="img" aria-label="disappointed face">😞</span></span>
+            );
         } else {
             setFeedback(<span>You eliminated <span style={{color: "red"}}>{removedCharacter.name}</span></span>);
-            props.setSelectedChar(removedCharacter);
+            // props.setSelectedChar(removedCharacter);
             // console.log(`${removedCharacter.name} was removed`);
         }
 
@@ -59,7 +65,7 @@ console.log(props.compChoice.name);
                     const newArr = [...prev];
                     console.log(char);
                     setFeedback(<span>You uneliminated <span style={{color: "green"}}>{char.name}</span></span>);
-                    props.setSelectedChar(char);
+                    // props.setSelectedChar(char);
                     newArr.push(char);
                     return newArr;
                 })
@@ -75,8 +81,9 @@ console.log(props.compChoice.name);
         <div className="board2">
             {
                 props.playerCharacters.map((char, index) => 
-                <div style={{margin: "0.2rem", width: "8rem", height: "8rem", background: `url(${char.pic})`,borderRadius: "10px", backgroundSize: "cover", backgroundPosition: "center", 
-                display: "flex", alignItems: "end", opacity: `${switcher[index] ? "1" : "0.5"}` }}
+                <div className="playerBoard-char" onMouseEnter={() => props.setSelectedChar(char)} 
+                style={{background: `url(${char.pic}) no-repeat center/cover`,
+                opacity: `${switcher[index] ? "1" : "0.5"}`}}
                 onClick={()=> {
                     
                      if (switcher[index]){

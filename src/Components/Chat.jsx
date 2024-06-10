@@ -177,14 +177,14 @@ function compText(text){
                 newArr.push(userText("Yes"));
                currentQuestion && eliminate(currentQuestion.questionId, true);
                 return newArr;
-            }); if (props.compCharacters.length !== 1) {ask()}}}>Yes</button>
+            })}}>Yes</button>
 
             <button className="btn" onClick={() => {setArr(prev =>{
                 const newArr = [...prev];
                 newArr.push(userText("No"));
                 currentQuestion && eliminate(currentQuestion.questionId, false)
                 return newArr;
-            }); if (props.compCharacters.length !== 1) {ask()}}}>No</button>
+            })}}>No</button>
 
             <button className="btn" onClick={() => {setArr(prev =>{
                 const newArr = [...prev];
