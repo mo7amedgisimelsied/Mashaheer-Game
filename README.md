@@ -1,3 +1,7 @@
+![Screenshot (847)](https://github.com/mo7amedgisimelsied/Mashaheer-Game/assets/146651073/dd1f5d97-593c-4179-b6e8-c640a97a71ed)
+![Screenshot (848)](https://github.com/mo7amedgisimelsied/Mashaheer-Game/assets/146651073/aa4c947c-cf6a-48b9-88ba-8f3214664334)
+
+
 # Mashaheer
 
 Welcome to **Mashaheer**, a digital twist on the classic game "Guess Who?" with a celebrity spin. This project is a web-based game where players engage in a battle of wits against the computer, using a series of questions to deduce the identity of a hidden celebrity.
